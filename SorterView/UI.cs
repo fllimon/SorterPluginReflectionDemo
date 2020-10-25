@@ -22,13 +22,21 @@ namespace SorterView
             _viewPlugins.GetRandomValue(_array);
         }
 
-        public string GetPluginName
+        private void GetPluginName()
         {
-            get
-            {
-                _pluginsNames = Directory.GetFiles(DefaultSettings.DEFAULT_DIRECTORY);
+            _pluginsNames = Directory.GetFiles(DefaultSettings.DEFAULT_DIRECTORY);
 
-                return _viewPlugins.GetPluginDirectory(_pluginsNames);
+            FileInfo namePlugin = null;
+
+            int numberPlugins = 1;
+
+            for (int i = 0; i < _pluginsNames.Length; i++)
+            {
+                numberPlugins += i;
+                namePlugin = new FileInfo(_pluginsNames[i]);
+
+                Console.WriteLine();
+                Console.WriteLine($"{numberPlugins} " + namePlugin.Name);
             }
         }
 
@@ -36,7 +44,7 @@ namespace SorterView
         {
             Console.WriteLine("Выберите плагин: ");
             Console.WriteLine();
-            Console.WriteLine(GetPluginName);
+            GetPluginName();
 
             char choice = Console.ReadKey().KeyChar;
 
@@ -45,11 +53,10 @@ namespace SorterView
                 int index = int.Parse(choice.ToString()) - 1;
 
                 Sorter plugin = _viewPlugins.GetPlugin(_pluginsNames[index]);
-
                 Analyzer objAnalyzer = new Analyzer(plugin);
-
                 plugin.Sort(_array);
 
+                Console.WriteLine();
                 Console.WriteLine($"SwapCount: {objAnalyzer.SwapCount} - Compare: {objAnalyzer.CompareCount}");
             }
             catch (Exception ex)

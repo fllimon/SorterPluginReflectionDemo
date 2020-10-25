@@ -9,8 +9,6 @@ namespace SorterView
 {
     interface IView
     {
-        string GetPluginDirectory(string[] pluginsNames);
-
         void GetRandomValue(double[] source);
 
         Sorter GetPlugin(string pluginName);

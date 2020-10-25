@@ -25,21 +25,6 @@ namespace SorterView
             }
         }
 
-        public string GetPluginDirectory(string[] pluginsNames)
-        {
-            FileInfo namePlugin = null;
-
-            int numberPlugins = 1;
-
-            for (int i = 0; i < pluginsNames.Length; i++)
-            {
-                numberPlugins += i;
-                namePlugin = new FileInfo(pluginsNames[i]);
-            }
-
-            return $"{numberPlugins} " + namePlugin.Name;
-        }
-
         public Sorter GetPlugin(string pluginName)
         {
             Sorter plugin = null;
